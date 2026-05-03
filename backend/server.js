@@ -23,17 +23,20 @@ app.use('/api/exercises', exerciseRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/users', userRoutes);
 
-// Route de test
+// Route test
 app.get('/', (req, res) => {
   res.json({ message: 'FitQuest API is running!' });
 });
 
-// Connexion MongoDB
+// MongoDB + server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB connected');
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
+
+    const PORT = process.env.PORT || 5000;
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => console.error('MongoDB error:', err));
