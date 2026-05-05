@@ -104,7 +104,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Graphique Calories */}
+      {/* Calories chart */}
       <div className="card mb-6 animate-slide-up">
         <h2 className="font-heading text-lg font-semibold text-text-main mb-5">
           {t('dashboard.caloriesChart')}
@@ -136,7 +136,7 @@ export default function Dashboard() {
         </ResponsiveContainer>
       </div>
 
-      {/* Graphique Workouts */}
+      {/* Workouts chart */}
       <div className="card mb-6 animate-slide-up">
         <h2 className="font-heading text-lg font-semibold text-text-main mb-5">
           {t('dashboard.workoutsPerDay')}
@@ -147,7 +147,7 @@ export default function Dashboard() {
             <XAxis dataKey="day" tick={{ fontSize: 12, fontFamily: 'Roboto' }} />
             <YAxis allowDecimals={false} tick={{ fontSize: 12, fontFamily: 'Roboto' }} />
             <Tooltip contentStyle={{ borderRadius: '12px', fontFamily: 'Roboto' }} />
-            <Bar dataKey="workouts" name="Workouts" fill="#2563EB" radius={[6, 6, 0, 0]} />
+            <Bar dataKey="workouts" name={t('dashboard.totalWorkouts')} fill="#2563EB" radius={[6, 6, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -162,7 +162,7 @@ export default function Dashboard() {
             {user.badges.map(badge => (
               <span key={badge}
                 className="bg-primary-light text-primary px-4 py-2 rounded-xl text-sm font-heading font-medium border border-primary/20">
-                ✓ {badge}
+                ✓ {t(`achievements.badgeNames.${badge}`, badge)}
               </span>
             ))}
           </div>

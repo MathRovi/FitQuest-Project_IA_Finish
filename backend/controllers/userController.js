@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
-// Récupérer le profil
+// The backend GET the user profile
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password');
@@ -11,7 +11,7 @@ exports.getProfile = async (req, res) => {
   }
 };
 
-// Mettre à jour username
+// Update the username
 exports.updateUsername = async (req, res) => {
   try {
     const { username } = req.body;
@@ -20,7 +20,7 @@ exports.updateUsername = async (req, res) => {
       return res.status(400).json({ message: 'Username trop court (min 3 caractères)' });
     }
 
-    // Vérifier si le username est déjà pris
+    // Verify if the username is already taken
     const existing = await User.findOne({ username, _id: { $ne: req.userId } });
     if (existing) {
       return res.status(400).json({ message: 'Ce username est déjà utilisé' });
@@ -38,7 +38,7 @@ exports.updateUsername = async (req, res) => {
   }
 };
 
-// Mettre à jour le mot de passe
+// Update the password
 exports.updatePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -67,7 +67,7 @@ exports.updatePassword = async (req, res) => {
   }
 };
 
-// Statistiques du profil
+// Profile statistics
 exports.getStats = async (req, res) => {
   try {
     const Workout = require('../models/Workout');
@@ -76,11 +76,11 @@ exports.getStats = async (req, res) => {
     const totalWorkouts = await Workout.countDocuments({ user: req.userId });
     const totalMeals = await Meal.countDocuments({ user: req.userId });
 
-    const workouts = await Workout.find({ user: req.userId });
+    const workouts = await Workout.find({ user: req.userId }); // get all workouts
     const totalCaloriesBurned = workouts.reduce((s, w) => s + w.caloriesBurned, 0);
     const totalDuration = workouts.reduce((s, w) => s + w.duration, 0);
 
-    const user = await User.findById(req.userId).select('-password');
+    const user = await User.findById(req.userId).select('-password'); // get user without password
 
     res.json({
       totalWorkouts,
@@ -96,17 +96,17 @@ exports.getStats = async (req, res) => {
 
 exports.updateCalorieGoal = async (req, res) => {
   try {
-    const { calorieGoal } = req.body;
+    const { calorieGoal } = req.body; // get calorie goal from request
 
     if (!calorieGoal || calorieGoal < 500 || calorieGoal > 10000) {
       return res.status(400).json({
         message: 'Objectif invalide (entre 500 et 10000 kcal)'
-      });
+      }); // check if value is valid
     }
 
     const user = await User.findByIdAndUpdate(
       req.userId,
-      { calorieGoal: Number(calorieGoal) },
+      { calorieGoal: Number(calorieGoal) }, // update calorie goal in database
       { new: true }
     ).select('-password');
 

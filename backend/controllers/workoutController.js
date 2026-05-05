@@ -1,12 +1,12 @@
 const Workout = require('../models/Workout');
-const User = require('../models/User');
+const User = require('../models/User'); 
 
-const updateStreak = async (userId) => {
-  const user = await User.findById(userId);
+const updateStreak = async (userId) => { 
+  const user = await User.findById(userId); // get user from database
   const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // today without time
 
-  let newStreak = user.streak || 0;
+  let newStreak = user.streak || 0; // current streak or 0
 
   if (!user.lastActive) {
     newStreak = 1;
@@ -14,12 +14,12 @@ const updateStreak = async (userId) => {
     const last = new Date(user.lastActive);
     const lastDay = new Date(last.getFullYear(), last.getMonth(), last.getDate());
     const diffMs = today.getTime() - lastDay.getTime();
-    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24)); // days difference
 
     if (diffDays === 0) {
-      return newStreak;
+      return newStreak; // already active today
     } else if (diffDays === 1) {
-      newStreak = (user.streak || 0) + 1;
+      newStreak = (user.streak || 0) + 1; // continue streak
     } else {
       newStreak = 1;
     }
@@ -27,12 +27,13 @@ const updateStreak = async (userId) => {
 
   await User.findByIdAndUpdate(userId, {
     streak: newStreak,
-    lastActive: now
+    lastActive: now // save new streak and last activity
   });
 
   return newStreak;
 };
 
+// check user progress and give badges + update level
 const checkAndAwardBadges = async (userId) => {
   const user = await User.findById(userId);
   const workoutCount = await Workout.countDocuments({ user: userId });
@@ -62,7 +63,7 @@ exports.createWorkout = async (req, res) => {
   try {
     const { name, type, duration, caloriesBurned, exercises } = req.body;
 
-    const workout = await Workout.create({
+    const workout = await Workout.create({ // count workouts
       user: req.userId,
       name, type, duration, caloriesBurned, exercises
     });
@@ -81,14 +82,14 @@ exports.createWorkout = async (req, res) => {
 
 exports.getWorkouts = async (req, res) => {
   try {
-    const { type, startDate, endDate, search } = req.query;
-    let filter = { user: req.userId };
+    const { type, startDate, endDate, search } = req.query; // get filters from request
+    let filter = { user: req.userId }; // base filter (user only)
 
     if (type && type !== 'all') {
       filter.type = type;
     }
 
-    if (startDate || endDate) {
+    if (startDate || endDate) { // create date filter
       filter.date = {};
       if (startDate) {
         const start = new Date(startDate);
@@ -102,7 +103,7 @@ exports.getWorkouts = async (req, res) => {
       }
     }
 
-    let workouts = await Workout.find(filter).sort({ date: -1 });
+    let workouts = await Workout.find(filter).sort({ date: -1 }); // get workouts sorted by date
 
     if (search) {
       workouts = workouts.filter(w =>
@@ -110,7 +111,7 @@ exports.getWorkouts = async (req, res) => {
       );
     }
 
-    res.json(workouts);
+    res.json(workouts); // send result
   } catch (error) {
     res.status(500).json({ message: 'Erreur serveur' });
   }
@@ -126,6 +127,7 @@ exports.getWorkoutById = async (req, res) => {
   }
 };
 
+// get one workout by its id for the current user
 exports.updateWorkout = async (req, res) => {
   try {
     const workout = await Workout.findOneAndUpdate(
@@ -140,6 +142,7 @@ exports.updateWorkout = async (req, res) => {
   }
 };
 
+// delete one workout by its id for the current user
 exports.deleteWorkout = async (req, res) => {
   try {
     const workout = await Workout.findOneAndDelete({ _id: req.params.id, user: req.userId });

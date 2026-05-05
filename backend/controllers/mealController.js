@@ -3,10 +3,11 @@ const User = require('../models/User');
 const axios = require('axios');
 
 
-// 🔹 Ajouter un repas
+// Add a meal section
 exports.createMeal = async (req, res) => {
   try {
-    const { name, mealType, calories, protein, carbs } = req.body;
+    // Date input here
+    const { name, mealType, calories, protein, carbs, date } = req.body;
 
     const meal = await Meal.create({
       user: req.userId,
@@ -14,7 +15,8 @@ exports.createMeal = async (req, res) => {
       mealType,
       calories,
       protein,
-      carbs
+      carbs,
+      date: date || Date.now() // The date the user registered the meal
     });
 
     await User.findByIdAndUpdate(req.userId, { $inc: { xp: 10 } });
@@ -31,7 +33,7 @@ exports.createMeal = async (req, res) => {
 };
 
 
-// 🔹 Récupérer les repas
+// Here we get the meal
 exports.getMeals = async (req, res) => {
   try {
     const { date } = req.query;
@@ -54,7 +56,7 @@ exports.getMeals = async (req, res) => {
 };
 
 
-// 🔹 Historique paginé
+// Shows the meal historic of the user, no limits
 exports.getMealHistory = async (req, res) => {
   try {
     const { page = 1, limit = 5 } = req.query;
@@ -102,7 +104,7 @@ exports.getMealHistory = async (req, res) => {
 };
 
 
-// 🔹 Supprimer un repas
+// Delete a meal
 exports.deleteMeal = async (req, res) => {
   try {
     const meal = await Meal.findOneAndDelete({
@@ -122,7 +124,7 @@ exports.deleteMeal = async (req, res) => {
 };
 
 
-// 🔥 IA NUTRITION (OPENROUTER)
+// OPENROUTER for the AI recognition meal, allowing an automatation of the data input.
 exports.analyzeMeal = async (req, res) => {
   const { query } = req.body;
 

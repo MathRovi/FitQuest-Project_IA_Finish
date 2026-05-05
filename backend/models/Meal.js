@@ -1,10 +1,11 @@
+// schema for a meal (food entry)
 const mongoose = require('mongoose');
 
 const mealSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true // link to user
   },
   name: { type: String, required: true },
   mealType: { type: String, enum: ['breakfast', 'lunch', 'dinner', 'snack'], required: true },
@@ -14,4 +15,4 @@ const mealSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Meal', mealSchema);
+module.exports = mongoose.model('Meal', mealSchema); // export model

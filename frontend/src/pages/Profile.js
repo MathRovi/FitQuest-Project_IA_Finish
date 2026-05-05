@@ -80,7 +80,7 @@ export default function Profile() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        {/* Carte profil */}
+        {/* Profile card */}
         <div className="card">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center text-white text-2xl font-heading font-bold">
@@ -95,7 +95,7 @@ export default function Profile() {
             </div>
           </div>
 
-          {/* Barre XP */}
+          {/* XP BAR */}
           <div className="mb-6">
             <div className="flex justify-between font-body text-sm text-text-muted mb-1">
               <span>{t('profile.level')} {user?.level}</span>
@@ -140,7 +140,7 @@ export default function Profile() {
                     earned ? 'badge-earned' : 'badge-locked'
                   }`}>
                   <div className="text-3xl mb-2">{badge.icon}</div>
-                  <p className="font-heading text-xs font-bold text-text-main">{badge.id}</p>
+                  <p className="font-heading text-xs font-bold text-text-main">{t(`achievements.badgeNames.${badge.id}`)}</p>
                   {earned && (
                     <span className="font-body text-xs text-primary font-medium">
                       {t('achievements.unlocked')}
@@ -163,7 +163,7 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Modifier username */}
+        {/* Change username */}
         <div className="card">
           <h2 className="font-heading text-lg font-bold text-text-main mb-4">
             {t('profile.changeUsername')}
@@ -190,7 +190,7 @@ export default function Profile() {
           </form>
         </div>
 
-        {/* Modifier mot de passe */}
+        {/* Change password */}
         <div className="card">
           <h2 className="font-heading text-lg font-bold text-text-main mb-4">
             {t('profile.changePassword')}

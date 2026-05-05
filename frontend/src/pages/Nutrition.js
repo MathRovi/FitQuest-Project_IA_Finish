@@ -1,3 +1,4 @@
+// Nutrition page: manage meals, calories, and daily goal
 import { useState, useEffect } from 'react';
 import { getMeals, createMeal, deleteMeal } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -5,11 +6,23 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import CalorieGoalWidget from '../components/CalorieGoalWidget';
 
+import DatePicker, { registerLocale } from 'react-datepicker';
+import { fr, enUS } from 'date-fns/locale';
+import 'react-datepicker/dist/react-datepicker.css';
+
+// Locale
+registerLocale('fr', fr);
+registerLocale('en', enUS);
+
 export default function Nutrition() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { refreshUser } = useAuth();
 
+  const today = new Date().toISOString().split('T')[0];
+
+  const [selectedDate, setSelectedDate] = useState(today);
   const [meals, setMeals] = useState([]);
+
   const [form, setForm] = useState({
     name: '',
     mealType: 'breakfast',
@@ -22,17 +35,20 @@ export default function Nutrition() {
   const [loading, setLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
 
-  const today = new Date().toISOString().split('T')[0];
   const mealTypes = ['breakfast', 'lunch', 'dinner', 'snack'];
 
-  useEffect(() => { fetchMeals(); }, []);
+  // New
+  const isToday = selectedDate === today;
+
+  useEffect(() => {
+    fetchMeals();
+  }, [selectedDate]);
 
   const fetchMeals = async () => {
-    const res = await getMeals(today);
+    const res = await getMeals(selectedDate);
     setMeals(res.data);
   };
 
-  // 🔥 IA
   const analyzeMeal = async () => {
     if (!form.name) return;
 
@@ -67,7 +83,8 @@ export default function Nutrition() {
     e.preventDefault();
     setLoading(true);
     try {
-      await createMeal(form);
+      await createMeal({ ...form, date: selectedDate });
+
       await refreshUser();
       setForm({ name: '', mealType: 'breakfast', calories: '', protein: '', carbs: '' });
       setShowForm(false);
@@ -90,7 +107,6 @@ export default function Nutrition() {
     }
   };
 
-  // 🔥 FEEDBACK
   const getFeedback = () => {
     if (!form.calories) return "";
 
@@ -104,7 +120,6 @@ export default function Nutrition() {
 
   const totalCals = meals.reduce((s, m) => s + m.calories, 0);
 
-  // 🔥 REGROUPEMENT PAR TYPE
   const mealsByType = {
     breakfast: [],
     lunch: [],
@@ -127,19 +142,51 @@ export default function Nutrition() {
           {t('nutrition.title')}
         </h1>
 
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="btn-primary text-sm"
-        >
-          {showForm ? t('nutrition.cancel') : t('nutrition.addMeal')}
-        </button>
+        {/* ADD meal button only appears TODAY */}
+        {isToday && (
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="btn-primary text-sm"
+          >
+            {showForm ? t('nutrition.cancel') : t('nutrition.addMeal')}
+          </button>
+        )}
       </div>
 
-      {/* OBJECTIF */}
+      {/* Calendar */}
+      <div className="mb-4">
+        <DatePicker
+          selected={selectedDate ? new Date(selectedDate) : new Date()}
+          onChange={(date) => {
+            if (!date) return;
+            const formatted = date.toISOString().split('T')[0];
+            setSelectedDate(formatted);
+          }}
+          dateFormat="dd/MM/yyyy"
+          locale={i18n.language === 'fr' ? 'fr' : 'en'}
+          popperPlacement="bottom-start"
+          customInput={
+            <button className="flex items-center gap-2 px-4 py-2 rounded-2xl border border-gray-200 bg-white shadow-card hover:shadow-card-hover hover:border-primary hover:text-primary transition-all duration-200 font-heading text-sm">
+              📅 {new Date(selectedDate).toLocaleDateString(
+                i18n.language === 'fr' ? 'fr-FR' : 'en-US'
+              )}
+            </button>
+          }
+        />
+      </div>
+
+      {/* Read only message */}
+      {!isToday && (
+        <p className="text-sm text-gray-400 mb-4">
+          {t('nutrition.readOnly')}
+        </p>
+      )}
+
+      {/* Goals */}
       <CalorieGoalWidget totalCalories={totalCals} />
 
-      {/* FORMULAIRE */}
-      {showForm && (
+      {/* Form */}
+      {showForm && isToday && (
         <div className="card mb-6">
           <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
 
@@ -190,7 +237,7 @@ export default function Nutrition() {
         </div>
       )}
 
-      {/* 🔥 AFFICHAGE PAR TYPE */}
+      {/* Input */}
       {mealTypes.map(type => (
         <div key={type} className="card mb-4">
 
@@ -221,7 +268,7 @@ export default function Nutrition() {
 
                 <button
                   onClick={() => handleDelete(meal._id)}
-                  className="text-red-400"
+                  className="text-red-400 hover:text-red-600 transition"
                 >
                   {t('nutrition.delete')}
                 </button>

@@ -1,4 +1,5 @@
-const express = require('express');
+// main server setup (Express + MongoDB)
+const express = require('express'); // create server
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
@@ -12,23 +13,23 @@ const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // allow requests from frontend
+app.use(express.json()); // read JSON body
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes); // auth routes (login/register)
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/meals', mealRoutes);
 app.use('/api/exercises', exerciseRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/users', userRoutes);
 
-// Route test
+// test route
 app.get('/', (req, res) => {
-  res.json({ message: 'FitQuest API is running!' });
+  res.json({ message: 'FitQuest API is running!' }); // check API works
 });
 
-// MongoDB + server
+// connect to database and start server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB connected');

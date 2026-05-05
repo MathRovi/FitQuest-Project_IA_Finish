@@ -1,3 +1,4 @@
+// Achievements page: shows user XP, level, badges, and progress
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
@@ -42,7 +43,7 @@ const ALL_BADGES = [
   },
 ];
 
-// Composant AnimatedCounter
+// AnimatedCounter
 function AnimatedCounter({ value, duration = 1000 }) {
   const [count, setCount] = useState(0);
 
@@ -64,7 +65,7 @@ function AnimatedCounter({ value, duration = 1000 }) {
   return <span>{count}</span>;
 }
 
-// Composant ProgressBar animée
+// Animated ProgressBar
 function AnimatedProgressBar({ value, max, color = 'bg-primary', delay = 0 }) {
   const [width, setWidth] = useState(0);
   const percentage = Math.min(Math.round((value / max) * 100), 100);
@@ -78,13 +79,13 @@ function AnimatedProgressBar({ value, max, color = 'bg-primary', delay = 0 }) {
     <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
       <div
         className={`h-3 rounded-full transition-all duration-1000 ease-out ${color}`}
-        style={{ width: `${width}%` }}
+        style={{ width: `${width}%` }} // dynamic width based on progress
       />
     </div>
   );
 }
 
-// Composant Badge Card
+// Badge Card
 function BadgeCard({ badge, earned, progress, max, t, index }) {
   const [animate, setAnimate] = useState(false);
 
@@ -93,14 +94,14 @@ function BadgeCard({ badge, earned, progress, max, t, index }) {
     return () => clearTimeout(timer);
   }, [index]);
 
-  const percentage = Math.min(Math.round((progress / max) * 100), 100);
+  const percentage = earned ? 100 : Math.min(Math.round((progress / max) * 100), 100);
 
   return (
     <div className={`relative card transition-all duration-500 ${
       animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
     } ${earned ? 'border-2 ' + badge.borderColor : 'border border-gray-200'}`}>
 
-      {/* Badge débloqué — effet brillant */}
+      {/* Unlocked badge with glowing effect */}
       {earned && (
         <div className="absolute top-3 right-3">
           <span className="bg-green-100 text-green-700 text-xs font-heading font-bold px-2 py-1 rounded-full">
@@ -109,7 +110,7 @@ function BadgeCard({ badge, earned, progress, max, t, index }) {
         </div>
       )}
 
-      {/* Icône avec gradient */}
+      {/* Gradient icone */}
       <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4 mx-auto
         ${earned
           ? `bg-gradient-to-br ${badge.color} shadow-lg`
@@ -118,24 +119,24 @@ function BadgeCard({ badge, earned, progress, max, t, index }) {
         {badge.icon}
       </div>
 
-      {/* Nom et description */}
+      {/* Name and description */}
       <h3 className="font-heading font-bold text-text-main text-center mb-1">
-        {badge.id}
+        {t(`achievements.badgeNames.${badge.id}`)}
       </h3>
       <p className="font-body text-xs text-text-muted text-center mb-4">
         {t(`achievements.badgeDescriptions.${badge.id}`)}
       </p>
 
-      {/* Barre de progression */}
+      {/* Progression bar */}
       <div className="space-y-1">
         <div className="flex justify-between font-body text-xs text-text-muted">
           <span>{t('achievements.progress')}</span>
           <span className="font-semibold">
-            {Math.min(progress, max)}/{max}
+            {earned ? max : Math.min(progress, max)}/{max}
           </span>
         </div>
         <AnimatedProgressBar
-          value={Math.min(progress, max)}
+          value={earned ? max : Math.min(progress, max)}
           max={max}
           color={earned ? `bg-gradient-to-r ${badge.color}` : 'bg-gray-300'}
           delay={index * 150}
@@ -145,7 +146,7 @@ function BadgeCard({ badge, earned, progress, max, t, index }) {
         </p>
       </div>
 
-      {/* Effet de verrouillage */}
+      {/* Locked effect */}
       {!earned && (
         <div className="mt-3 text-center">
           <span className="font-body text-xs text-gray-400">
@@ -160,24 +161,22 @@ function BadgeCard({ badge, earned, progress, max, t, index }) {
 export default function Achievements() {
   const { user } = useAuth();
   const { t } = useTranslation();
-  const [stats, setStats] = useState(null);
+  const [stats, setStats] = useState(null); // store stats (workouts, etc.)
   const [showConfetti, setShowConfetti] = useState(false);
+  useEffect(() => {
+    getStats()
+    .then(res => setStats(res.data))
+    .catch(() => setStats({ totalWorkouts: 0 }));
+}, []);
 
+  // user badges (or empty if none)
   const earnedBadges = user?.badges || [];
   const xp = user?.xp || 0;
   const level = user?.level || 1;
   const xpInLevel = xp % 100;
   const xpToNextLevel = 100 - xpInLevel;
 
-  useEffect(() => {
-    getStats().then(res => setStats(res.data));
-    // Animation confetti si badges récemment débloqués
-    if (earnedBadges.length > 0) {
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 3000);
-    }
-  }, []);
-
+  
   const getBadgeProgress = (badge) => {
     if (!stats) return 0;
     if (badge.type === 'workouts') return stats.totalWorkouts;
@@ -189,7 +188,7 @@ export default function Achievements() {
     { icon: '🏋️', label: t('achievements.addWorkout'), xp: '+20 XP', color: 'text-primary', bg: 'bg-primary-light' },
     { icon: '🥗', label: t('achievements.logMeal'), xp: '+10 XP', color: 'text-secondary', bg: 'bg-secondary-light' },
     { icon: '🔥', label: t('achievements.streak7'), xp: '+50 XP', color: 'text-orange-500', bg: 'bg-orange-50' },
-    { icon: '⬆️', label: 'Level up', xp: '100 XP', color: 'text-purple-600', bg: 'bg-purple-50' },
+    { icon: '⬆️', label: t('home.levelUp'), xp: '100 XP', color: 'text-purple-600', bg: 'bg-purple-50' },
   ];
 
   return (
@@ -217,7 +216,7 @@ export default function Achievements() {
         {t('achievements.title')}
       </h1>
 
-      {/* Carte XP & Niveau */}
+      {/* XP card and level */}
       <div className="card mb-6 animate-slide-up">
         <div className="flex justify-between items-start mb-6">
           <div>
@@ -234,7 +233,7 @@ export default function Achievements() {
           </div>
         </div>
 
-        {/* Barre XP vers prochain niveau */}
+        {/* XP bar until next level */}
         <div className="space-y-2">
           <div className="flex justify-between font-body text-sm text-text-muted">
             <span>{t('achievements.yourLevel')} {level}</span>
@@ -253,13 +252,15 @@ export default function Achievements() {
             <p className="font-heading text-2xl font-bold text-secondary">
               <AnimatedCounter value={stats?.totalWorkouts || 0} />
             </p>
-            <p className="font-body text-xs text-text-muted">Workouts</p>
+            <p className="font-body text-xs text-text-muted">{t('workouts.totalWorkouts')}</p>
           </div>
           <div className="text-center">
             <p className="font-heading text-2xl font-bold text-orange-500">
               <AnimatedCounter value={user?.streak || 0} />
             </p>
-            <p className="font-body text-xs text-text-muted">Streak 🔥</p>
+            <p className="font-body text-xs text-text-muted">
+              {t('dashboard.currentStreak')} 🔥
+            </p>
           </div>
           <div className="text-center">
             <p className="font-heading text-2xl font-bold text-purple-600">
@@ -288,7 +289,7 @@ export default function Achievements() {
         ))}
       </div>
 
-      {/* Comment gagner des XP */}
+      {/* How to earn XP */}
       <div className="card animate-fade-in">
         <h2 className="font-heading text-lg font-bold text-text-main mb-4">
           {t('achievements.howToEarn')}

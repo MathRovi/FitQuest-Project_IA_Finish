@@ -48,12 +48,12 @@ function AppRoutes() {
       />
       {user && <Navbar />}
       <Routes>
-        {/* Page publique */}
+        {/* Public page */}
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Pages privées */}
+        {/* Private pages */}
         <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/workouts" element={<PrivateRoute><Workouts /></PrivateRoute>} />
         <Route path="/nutrition" element={<PrivateRoute><Nutrition /></PrivateRoute>} />

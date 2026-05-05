@@ -1,15 +1,14 @@
+// French translation
 const fr = {
-  // Navbar
   nav: {
-    dashboard: 'Dashboard',
-    workouts: 'Workouts',
+    dashboard: 'Tableau de bord',
+    workouts: 'Entraînements',
     nutrition: 'Nutrition',
-    achievements: 'Achievements',
+    achievements: 'Succès',
     exercises: 'Exercices',
     logout: 'Déconnexion',
   },
 
-  // Auth
   auth: {
     login: 'Connexion',
     register: "Créer un compte",
@@ -27,19 +26,18 @@ const fr = {
     accountCreated: 'Compte créé avec succès !',
     loginError: 'Erreur de connexion',
     registerError: 'Erreur inscription',
-    tagline: 'Track workouts, nutrition and stay motivated',
+    tagline: 'Suivez vos entraînements, votre nutrition et restez motivé',
     joinCommunity: 'Rejoins la communauté FitQuest',
   },
 
-  // Dashboard
   dashboard: {
     welcome: 'Bienvenue,',
     subtitle: 'Voici ton résumé du moment',
-    currentStreak: 'Streak actuel',
+    currentStreak: 'Série actuelle',
     days: 'jours',
-    totalXP: 'XP Total',
+    totalXP: 'XP total',
     level: 'Niveau',
-    totalWorkouts: 'Total Workouts',
+    totalWorkouts: 'Total des entraînements',
     sinceBeginning: 'Depuis le début',
     caloriesBurned: 'Calories brûlées',
     lastDays: '7 derniers jours',
@@ -48,24 +46,24 @@ const fr = {
     caloriesChart: 'Calories — 7 derniers jours',
     burned: 'Brûlées',
     consumed: 'Consommées',
-    workoutsPerDay: 'Workouts par jour',
+    workoutsPerDay: 'Entraînements par jour',
     unlockedBadges: 'Badges débloqués 🏆',
     loading: 'Chargement...',
+    currentStreak: 'Série Actuelle',
   },
 
-  // Workouts
   workouts: {
-    title: 'Mes Workouts',
-    found: 'workout trouvé',
-    founds: 'workouts trouvés',
+    title: 'Mes entraînements',
+    found: 'entraînement trouvé',
+    founds: 'entraînements trouvés',
     filters: 'Filtres',
     resetFilters: 'Réinitialiser tout',
     searchByName: 'Rechercher par nom',
-    searchPlaceholder: 'Ex: Running, Chest Day...',
-    workoutType: 'Type de workout',
+    searchPlaceholder: 'Ex : Course à pied, séance pectoraux...',
+    workoutType: "Type d'entraînement",
     period: 'Période',
     allTypes: 'Tous les types',
-    allPeriods: 'Toute période',
+    allPeriods: 'Toutes périodes',
     today: "Aujourd'hui",
     last7: '7 derniers jours',
     last30: '30 derniers jours',
@@ -74,32 +72,31 @@ const fr = {
     endDate: 'Date de fin',
     add: '+ Ajouter',
     cancel: '✕ Annuler',
-    newWorkout: 'Nouveau workout',
-    workoutName: 'Nom du workout',
+    newWorkout: 'Nouvel entraînement',
+    workoutName: "Nom de l'entraînement",
     duration: 'Durée (min)',
     caloriesBurned: 'Calories brûlées',
-    save: '💾 Sauvegarder (+20 XP)',
+    save: '💾 Enregistrer (+20 XP)',
     saving: 'Enregistrement...',
     delete: 'Supprimer',
-    noWorkout: 'Aucun workout trouvé',
-    noWorkoutSub: 'Ajoute ton premier workout !',
+    noWorkout: 'Aucun entraînement trouvé',
+    noWorkoutSub: 'Ajoute ton premier entraînement !',
     modifyFilters: 'Essaie de modifier tes filtres',
-    totalWorkouts: 'Workouts',
+    totalWorkouts: 'Entraînements',
     totalMinutes: 'Minutes totales',
     totalCalories: 'Calories brûlées',
-    addedSuccess: '💪 Workout ajouté ! +20 XP',
-    deletedSuccess: 'Workout supprimé',
-    addError: "Erreur lors de l'ajout du workout",
+    addedSuccess: '💪 Entraînement ajouté ! +20 XP',
+    deletedSuccess: 'Entraînement supprimé',
+    addError: "Erreur lors de l'ajout de l'entraînement",
     deleteError: 'Erreur lors de la suppression',
     types: {
-      strength: '💪 Force',
+      strength: '💪 Musculation',
       cardio: '🏃 Cardio',
       yoga: '🧘 Yoga',
       other: '⚡ Autre',
     }
   },
 
-  // Nutrition
   nutrition: {
     title: 'Nutrition',
     calories: 'Calories',
@@ -132,7 +129,8 @@ const fr = {
     deletedSuccess: 'Repas supprimé',
     addError: "Erreur lors de l'ajout du repas",
     deleteError: 'Erreur lors de la suppression',
-
+    consumed: 'consommées',
+    readOnly: "📖 Mode consultation — impossible d’ajouter des repas pour cette date",
     mealTypes: {
       breakfast: '🌅 Petit-déjeuner',
       lunch: '☀️ Déjeuner',
@@ -153,7 +151,6 @@ const fr = {
     of: 'sur',
     analyze: "Analyser 🍎",
 
-    // 🔥 AJOUT IMPORTANT
     feedback: {
       light: "🥗 Léger, parfait pour une collation",
       protein: "💪 Riche en protéines, idéal pour le sport",
@@ -163,86 +160,70 @@ const fr = {
     }
   },
 
-  // Achievements
   achievements: {
-    title: 'Achievements',
+    title: 'Succès',
     totalXP: 'XP total',
-    xpToNext: 'XP pour le niveau',
+    xpToNext: 'XP pour le prochain niveau',
     badges: 'Badges',
     unlocked: 'Débloqué ✓',
     locked: 'Verrouillé',
     howToEarn: 'Comment gagner des XP',
-    addWorkout: 'Ajouter un workout',
-    logMeal: 'Logger un repas',
-    streak7: 'Streak 7 jours',
+    addWorkout: 'Ajouter un entraînement',
+    logMeal: 'Enregistrer un repas',
+    streak7: 'Série de 7 jours',
     progress: 'Progression',
     yourLevel: 'Ton niveau',
-    nextLevel: 'Prochain niveau',
+    nextLevel: 'Niveau suivant',
     xpNeeded: 'XP nécessaires',
     allBadges: 'Tous les badges',
-    earnedOn: 'Débloqué',
+    earnedOn: 'Débloqué le',
+
+    badgeNames: {
+      'First Workout': '🏋️ Premier entraînement',
+      'Fitness Beginner': '⭐ Débutant fitness',
+      'Consistency Champion': '🏆 Champion de régularité',
+      '7 Day Streak': '🔥 Série de 7 jours',
+    },
+
     badgeDescriptions: {
-      'First Workout': 'Complète ton premier workout',
-      'Fitness Beginner': 'Complète 10 workouts',
-      'Consistency Champion': 'Complète 50 workouts',
-      '7 Day Streak': 'Maintiens un streak de 7 jours',
+      'First Workout': 'Complète ton premier entraînement',
+      'Fitness Beginner': 'Complète 10 entraînements',
+      'Consistency Champion': 'Complète 50 entraînements',
+      '7 Day Streak': 'Maintiens une série de 7 jours',
     }
   },
 
-  // Exercise Library
-  exercises: {
-    title: "Bibliothèque d'exercices",
-    search: 'Rechercher un exercice...',
-    found: 'exercice trouvé',
-    founds: 'exercices trouvés',
-    clickDetails: 'Cliquer pour les détails',
-    clickClose: 'Cliquer pour fermer',
-    allMuscles: 'Tous',
-    allLevels: 'Tous niveaux',
-    muscles: {
-      chest: 'Pectoraux',
-      back: 'Dos',
-      legs: 'Jambes',
-      shoulders: 'Épaules',
-      arms: 'Bras',
-      core: 'Abdos',
-      cardio: 'Cardio',
-    },
-  },
-
-  // Profile
   profile: {
-    title: 'Mon Profil',
+    title: 'Mon profil',
     level: 'Niveau',
-    xpToNext: 'XP',
-    totalWorkouts: 'Workouts total',
-    totalMeals: 'Repas loggés',
+    xpToNext: 'XP restants',
+    totalWorkouts: 'Entraînements totaux',
+    totalMeals: 'Repas enregistrés',
     caloriesBurned: 'Calories brûlées',
     trainingMinutes: "Minutes d'entraînement",
     badges: 'Badges',
-    currentStreak: 'Streak actuel',
+    currentStreak: 'Série actuelle',
     days: 'jours',
-    changeUsername: 'Changer le username',
-    newUsername: 'Nouveau username',
+    changeUsername: "Changer le nom d'utilisateur",
+    newUsername: "Nouveau nom d'utilisateur",
     update: 'Mettre à jour',
     changePassword: 'Changer le mot de passe',
     currentPassword: 'Mot de passe actuel',
     newPassword: 'Nouveau mot de passe',
-    confirmPassword: 'Confirmer le nouveau mot de passe',
-    changePasswordBtn: 'Changer le mot de passe',
+    confirmPassword: 'Confirmer le mot de passe',
+    changePasswordBtn: 'Modifier le mot de passe',
     passwordMismatch: 'Les mots de passe ne correspondent pas',
-    usernameUpdated: 'Username mis à jour ! ✓',
+    usernameUpdated: "Nom d'utilisateur mis à jour ! ✓",
     passwordUpdated: 'Mot de passe mis à jour ! 🔒',
     loading: 'Chargement...',
   },
 
-  // Home
   home: {
     hero: 'Transforme ta',
     heroFitness: 'fitness',
     heroIn: 'en',
     heroAdventure: 'aventure',
-    heroSub: "FitQuest te permet de tracker tes workouts et ta nutrition tout en gagnant des XP, débloquant des badges et maintenant des streaks. Reste motivé, chaque jour.",
+    heroSub: "FitQuest te permet de suivre tes entraînements et ta nutrition tout en gagnant des XP, débloquant des badges et en maintenant des séries. Reste motivé chaque jour.",
     startFree: 'Commencer gratuitement →',
     login: 'Se connecter',
     featuresTitle: 'Tout ce dont tu as besoin',
@@ -255,14 +236,114 @@ const fr = {
     gamified: 'La fitness, gamifiée',
     everyAction: 'Chaque action compte 🎯',
     everyActionSub: 'Le système de gamification te récompense pour chaque habitude saine',
-    perWorkout: 'par workout ajouté',
-    perMeal: 'par repas loggé',
-    perStreak: 'pour un streak de 7 jours',
+    perWorkout: 'par entraînement ajouté',
+    perMeal: 'par repas enregistré',
+    perStreak: 'pour une série de 7 jours',
     levelUp: 'Monter de niveau',
-    footer: 'A Gamified Fitness and Nutrition Web Application',
+    footer: 'Application web de fitness et nutrition gamifiée',
+
+    obtainBadges: "Obtiens des badges",
+
+    features: {
+      workoutTitle: "Suivi des entraînements",
+      workoutDesc: "Enregistre tes séances, exercices et progrès.",
+      nutritionTitle: "Suivi nutrition",
+      nutritionDesc: "Gère tes repas et calories.",
+      xpTitle: "Système XP",
+      xpDesc: "Gagne de l'expérience.",
+      badgesTitle: "Badges",
+      badgesDesc: "Débloque des récompenses.",
+      streakTitle: "Série actuelle",
+      streakDesc: "Reste régulier.",
+      dashboardTitle: "Tableau de bord",
+      dashboardDesc: "Visualise tes statistiques."
+    },
+
+    steps: {
+      create: "Crée ton compte",
+      createDesc: "Inscription rapide.",
+      log: "Ajoute tes activités",
+      logDesc: "Entraînements et repas.",
+      earn: "Gagne des récompenses",
+      earnDesc: "XP et badges."
+    }
   },
 
-  // Common
+
+    exercises: {
+      title: "Bibliothèque d'exercices",
+      search: "Rechercher un exercice...",
+      found: "exercice trouvé",
+      founds: "exercices trouvés",
+      allMuscles: "Tous",
+      allLevels: "Tous niveaux",
+      clickDetails: "Cliquer pour les détails",
+      clickClose: "Cliquer pour fermer",
+
+      muscles: {
+        chest: "Pectoraux",
+        back: "Dos",
+        legs: "Jambes",
+        shoulders: "Épaules",
+        arms: "Bras",
+        core: "Abdos",
+        cardio: "Cardio"
+      },
+
+      difficulty: {
+        all: "Tous niveaux",
+        beginner: "Débutant",
+        intermediate: "Intermédiaire",
+        advanced: "Avancé"
+        
+      },
+
+      descriptions: {
+        "Bench Press": "Exercice classique pour les pectoraux avec barre.",
+        "Push Up": "Exercice au poids du corps pour les pectoraux et triceps.",
+        "Incline Bench Press": "Banc incliné ciblant le haut des pectoraux.",
+        "Chest Fly": "Exercice d’isolation des pectoraux.",
+        "Dips": "Exercice poids du corps pour pectoraux et triceps.",
+        
+        "Deadlift": "Exercice complet ciblant dos et jambes.",
+        "Pull Up": "Exercice du dos au poids du corps.",
+        "Bent Over Row": "Rowing barre pour le dos.",
+        "Lat Pulldown": "Exercice machine pour le dos.",
+        "Seated Cable Row": "Rowing poulie pour le milieu du dos.",
+        
+        "Squat": "Exercice fondamental pour les jambes.",
+        "Leg Press": "Exercice machine pour les jambes.",
+        "Romanian Deadlift": "Soulevé de terre ciblant les ischios.",
+        "Lunges": "Exercice unilatéral pour les jambes.",
+        "Leg Curl": "Exercice d’isolation des ischios.",
+        "Calf Raises": "Exercice pour les mollets.",
+        
+        "Overhead Press": "Développé épaules avec barre ou haltères.",
+        "Lateral Raise": "Élévation latérale pour les épaules.",
+        "Front Raise": "Élévation frontale pour les épaules.",
+        "Arnold Press": "Développé épaules avec rotation.",
+        
+        "Bicep Curl": "Exercice pour les biceps.",
+        "Tricep Pushdown": "Extension triceps à la poulie.",
+        "Hammer Curl": "Curl marteau pour les bras.",
+        "Skull Crusher": "Extension triceps allongé.",
+        
+        "Plank": "Gainage pour le tronc.",
+        "Crunch": "Exercice pour les abdominaux.",
+        "Russian Twist": "Rotation pour les abdominaux.",
+        "Leg Raise": "Relevé de jambes pour abdos.",
+        "Ab Wheel": "Exercice avancé pour les abdominaux.",
+        
+        "Running": "Course à pied pour le cardio.",
+        "Cycling": "Vélo pour le cardio.",
+        "Jump Rope": "Corde à sauter pour le cardio.",
+        "Rowing Machine": "Rameur pour le cardio.",
+        "Burpees": "Exercice complet intensif."
+      }
+    },
+  
+  footerCreators: 'Créé par Adam Saidane, Matheo Rouviere et Lucas Bonsergent',
+
   common: {
     loading: 'Chargement...',
     error: 'Erreur serveur',

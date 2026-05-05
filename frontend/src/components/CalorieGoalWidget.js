@@ -1,3 +1,4 @@
+// React component to display and update user's calorie goal
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { updateCalorieGoal } from '../services/api';
@@ -5,18 +6,21 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
 export default function CalorieGoalWidget({ totalCalories }) {
+  // get user data and helper functions from auth context
   const { user, refreshUser } = useAuth();
   const { t } = useTranslation();
   const [editing, setEditing] = useState(false);
   const [goalInput, setGoalInput] = useState(user?.calorieGoal || 2000);
   const [loading, setLoading] = useState(false);
 
+  // get calorie goal (default 2000 if not set)
   const goal = user?.calorieGoal || 2000;
   const percentage = Math.min(Math.round((totalCalories / goal) * 100), 100);
   const remaining = goal - totalCalories;
   const exceeded = totalCalories > goal;
   const reached = totalCalories >= goal;
 
+  // save new calorie goal
   const handleSave = async () => {
     setLoading(true);
     try {
@@ -31,18 +35,21 @@ export default function CalorieGoalWidget({ totalCalories }) {
     }
   };
 
+  // choose progress bar color based on percentage
   const getBarColor = () => {
     if (percentage >= 100) return 'bg-red-500';
     if (percentage >= 80) return 'bg-orange-400';
     return 'bg-secondary';
   };
 
+  // choose text color based on progress
   const getTextColor = () => {
     if (exceeded) return 'text-red-500';
     if (percentage >= 80) return 'text-orange-500';
     return 'text-secondary';
   };
 
+  // UI header: title, description, and edit button
   return (
     <div className="card mb-6 animate-slide-up">
       <div className="flex justify-between items-center mb-4">
@@ -61,7 +68,7 @@ export default function CalorieGoalWidget({ totalCalories }) {
         </button>
       </div>
 
-      {/* Formulaire édition */}
+      {/* For editing */}
       {editing && (
         <div className="mb-4 p-4 bg-gray-50 rounded-xl animate-fade-in">
           <label className="font-body text-sm font-medium text-text-muted mb-2 block">
@@ -90,7 +97,7 @@ export default function CalorieGoalWidget({ totalCalories }) {
             </button>
           </div>
 
-          {/* Suggestions rapides */}
+          {/* Quick Suggestions */}
           <div className="flex gap-2 mt-3 flex-wrap">
             {[1500, 1800, 2000, 2200, 2500, 3000].map(val => (
               <button key={val}
@@ -107,7 +114,7 @@ export default function CalorieGoalWidget({ totalCalories }) {
         </div>
       )}
 
-      {/* Barre de progression */}
+      {/* Progression bar */}
       <div className="space-y-2 mb-4">
         <div className="flex justify-between font-body text-sm">
           <span className="text-text-muted">{t('nutrition.progressToGoal')}</span>

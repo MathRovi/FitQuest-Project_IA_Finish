@@ -1,3 +1,4 @@
+// middleware to check JWT token and identify user
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {

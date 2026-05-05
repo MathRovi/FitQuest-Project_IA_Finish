@@ -6,7 +6,7 @@ exports.getDashboardData = async (req, res) => {
   try {
     const userId = req.userId;
 
-    // Workouts des 7 derniers jours
+    // Workouts of the last 7 days
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
@@ -15,12 +15,13 @@ exports.getDashboardData = async (req, res) => {
       date: { $gte: sevenDaysAgo }
     }).sort({ date: 1 });
 
+    // Recent meals section 
     const recentMeals = await Meal.find({
       user: userId,
       date: { $gte: sevenDaysAgo }
     }).sort({ date: 1 });
 
-    // Construire les données pour les graphiques (7 derniers jours)
+    // Here we build the data for the graphs, only concidering the last 7 days
     const days = [];
     for (let i = 6; i >= 0; i--) {
       const d = new Date();
@@ -43,6 +44,7 @@ exports.getDashboardData = async (req, res) => {
       });
     }
 
+    // Here we load a user and we calculate the statistics like the amount of workouts and calories burned, finally we send everything to the frontend.
     const user = await User.findById(userId).select('-password');
 
     res.json({

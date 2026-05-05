@@ -1,3 +1,4 @@
+// English translation
 const en = {
   nav: {
     dashboard: 'Dashboard',
@@ -48,6 +49,8 @@ const en = {
     workoutsPerDay: 'Workouts per day',
     unlockedBadges: 'Unlocked badges 🏆',
     loading: 'Loading...',
+    currentStreak: 'Current streak',
+    
   },
 
   workouts: {
@@ -127,7 +130,8 @@ const en = {
     deletedSuccess: 'Meal deleted',
     addError: 'Error adding meal',
     deleteError: 'Error deleting meal',
-
+    consumed: 'consumed',
+    readOnly: "📖 View mode — you cannot add meals for this date",
     mealTypes: {
       breakfast: '🌅 Breakfast',
       lunch: '☀️ Lunch',
@@ -148,7 +152,6 @@ const en = {
     of: 'of',
     analyze: "Analyze 🍎",
 
-    // 🔥 AJOUT ICI
     feedback: {
       light: "🥗 Light meal, perfect for a snack",
       protein: "💪 High in protein, great for training",
@@ -175,6 +178,14 @@ const en = {
     xpNeeded: 'XP needed',
     allBadges: 'All badges',
     earnedOn: 'Unlocked',
+
+    badgeNames: {
+      'First Workout': '🏋️ First Workout',
+      'Fitness Beginner': '⭐ Fitness Beginner',
+      'Consistency Champion': '🏆 Consistency Champion',
+      '7 Day Streak': '🔥 7 Day Streak',
+    },
+
     badgeDescriptions: {
       'First Workout': 'Complete your first workout',
       'Fitness Beginner': 'Complete 10 workouts',
@@ -183,15 +194,72 @@ const en = {
     }
   },
 
+  // HOME
+  home: {
+    hero: 'Transform your',
+    heroFitness: 'fitness',
+    heroIn: 'into an',
+    heroAdventure: 'adventure',
+    heroSub: 'FitQuest lets you track your workouts and nutrition while earning XP, unlocking badges and maintaining streaks.',
+    startFree: 'Get started for free →',
+    login: 'Sign in',
+
+    featuresTitle: 'Everything you need',
+    featuresSub: 'A complete app to transform your fitness habits',
+
+    howTitle: 'How does it work?',
+    howSub: 'Get started in 3 simple steps',
+
+    ctaTitle: 'Ready to start your adventure?',
+    ctaSub: 'Join FitQuest for free and transform your fitness habits today.',
+    ctaBtn: 'Create my free account →',
+
+    gamified: 'Fitness, gamified',
+    everyAction: 'Every action counts 🎯',
+    everyActionSub: 'Gamification rewards every healthy habit',
+    perWorkout: 'per workout added',
+    perMeal: 'per meal logged',
+    perStreak: 'for a 7-day streak',
+    levelUp: 'Level up',
+    obtainBadges: "Earn badges",
+
+    footer: 'A Gamified Fitness and Nutrition Web Application',
+
+    features: {
+      workoutTitle: "Workout Tracking",
+      workoutDesc: "Track your workouts and progress.",
+      nutritionTitle: "Nutrition Tracking",
+      nutritionDesc: "Monitor your meals and calories.",
+      xpTitle: "XP System",
+      xpDesc: "Earn experience points.",
+      badgesTitle: "Badges",
+      badgesDesc: "Unlock achievements.",
+      streakTitle: "Streaks",
+      streakDesc: "Stay consistent daily.",
+      dashboardTitle: "Dashboard",
+      dashboardDesc: "Visualize your stats."
+    },
+
+    steps: {
+      create: "Create your account",
+      createDesc: "Quick signup in seconds.",
+      log: "Log your activities",
+      logDesc: "Track workouts and meals.",
+      earn: "Earn rewards",
+      earnDesc: "Gain XP and unlock badges."
+    }
+  },
+
   exercises: {
     title: 'Exercise Library',
     search: 'Search an exercise...',
     found: 'exercise found',
     founds: 'exercises found',
+    allMuscles: 'All',
+    allLevels: 'All Levels',
     clickDetails: 'Click for details',
     clickClose: 'Click to close',
-    allMuscles: 'All',
-    allLevels: 'All levels',
+
     muscles: {
       chest: 'Chest',
       back: 'Back',
@@ -199,59 +267,61 @@ const en = {
       shoulders: 'Shoulders',
       arms: 'Arms',
       core: 'Core',
-      cardio: 'Cardio',
+      cardio: 'Cardio'
     },
+
+    difficulty: {
+      all: "All levels",
+      beginner: 'Beginner',
+      intermediate: 'Intermediate',
+      advanced: 'Advanced'
+    },
+
+    descriptions: {
+      "Bench Press": "Classic chest exercise using a barbell on a flat bench.",
+      "Push Up": "Bodyweight exercise targeting chest and triceps.",
+      "Incline Bench Press": "Incline bench press targeting upper chest.",
+      "Chest Fly": "Isolation exercise focusing on chest muscles.",
+      "Dips": "Bodyweight exercise targeting chest and triceps.",
+      
+      "Deadlift": "Full-body compound exercise focusing on back and legs.",
+      "Pull Up": "Bodyweight back exercise using a pull-up bar.",
+      "Bent Over Row": "Barbell row targeting upper and middle back.",
+      "Lat Pulldown": "Machine exercise for back width and strength.",
+      "Seated Cable Row": "Cable exercise targeting mid-back.",
+      
+      "Squat": "Fundamental lower body exercise targeting quads and glutes.",
+      "Leg Press": "Machine exercise for legs with controlled movement.",
+      "Romanian Deadlift": "Hamstring-focused deadlift variation.",
+      "Lunges": "Unilateral leg exercise improving balance and strength.",
+      "Leg Curl": "Isolation exercise for hamstrings.",
+      "Calf Raises": "Exercise targeting calf muscles.",
+      
+      "Overhead Press": "Shoulder press exercise using barbell or dumbbells.",
+      "Lateral Raise": "Isolation exercise targeting side delts.",
+      "Front Raise": "Exercise focusing on front shoulders.",
+      "Arnold Press": "Dumbbell shoulder press with rotation.",
+      
+      "Bicep Curl": "Isolation exercise for biceps.",
+      "Tricep Pushdown": "Cable exercise targeting triceps.",
+      "Hammer Curl": "Bicep curl variation targeting brachialis.",
+      "Skull Crusher": "Lying triceps extension exercise.",
+      
+      "Plank": "Core stability exercise using bodyweight.",
+      "Crunch": "Abdominal exercise focusing on upper abs.",
+      "Russian Twist": "Rotational core exercise.",
+      "Leg Raise": "Lower abdominal exercise.",
+      "Ab Wheel": "Advanced core exercise using ab wheel.",
+      
+      "Running": "Cardio exercise improving endurance.",
+      "Cycling": "Low-impact cardio exercise.",
+      "Jump Rope": "Cardio exercise improving coordination.",
+      "Rowing Machine": "Full-body cardio machine exercise.",
+      "Burpees": "High-intensity full-body exercise."
+    }
   },
 
-  profile: {
-    title: 'My Profile',
-    level: 'Level',
-    xpToNext: 'XP',
-    totalWorkouts: 'Total workouts',
-    totalMeals: 'Meals logged',
-    caloriesBurned: 'Calories burned',
-    trainingMinutes: 'Training minutes',
-    badges: 'Badges',
-    currentStreak: 'Current streak',
-    days: 'days',
-    changeUsername: 'Change username',
-    newUsername: 'New username',
-    update: 'Update',
-    changePassword: 'Change password',
-    currentPassword: 'Current password',
-    newPassword: 'New password',
-    confirmPassword: 'Confirm new password',
-    changePasswordBtn: 'Change password',
-    passwordMismatch: 'Passwords do not match',
-    usernameUpdated: 'Username updated! ✓',
-    passwordUpdated: 'Password updated! 🔒',
-    loading: 'Loading...',
-  },
-
-  home: {
-    hero: 'Transform your',
-    heroFitness: 'fitness',
-    heroIn: 'into an',
-    heroAdventure: 'adventure',
-    heroSub: 'FitQuest lets you track your workouts and nutrition while earning XP, unlocking badges and maintaining streaks. Stay motivated, every day.',
-    startFree: 'Get started for free →',
-    login: 'Sign in',
-    featuresTitle: 'Everything you need',
-    featuresSub: 'A complete app to transform your fitness habits',
-    howTitle: 'How does it work?',
-    howSub: 'Get started in 3 simple steps',
-    ctaTitle: 'Ready to start your adventure?',
-    ctaSub: 'Join FitQuest for free and transform your fitness habits today.',
-    ctaBtn: 'Create my free account →',
-    gamified: 'Fitness, gamified',
-    everyAction: 'Every action counts 🎯',
-    everyActionSub: 'The gamification system rewards you for every healthy habit',
-    perWorkout: 'per workout added',
-    perMeal: 'per meal logged',
-    perStreak: 'for a 7-day streak',
-    levelUp: 'Level up',
-    footer: 'A Gamified Fitness and Nutrition Web Application',
-  },
+footerCreators: 'Created by Adam Saidane, Matheo Rouviere and Lucas Bonsergent',
 
   common: {
     loading: 'Loading...',

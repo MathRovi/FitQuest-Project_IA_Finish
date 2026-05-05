@@ -4,7 +4,7 @@ const API = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/api`
 });
 
-// Ajoute automatiquement le token JWT à chaque requête
+// Automatically adds a JWT token to each request
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem('token');
   if (token) req.headers.Authorization = `Bearer ${token}`;

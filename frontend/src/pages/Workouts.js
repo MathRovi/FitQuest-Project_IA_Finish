@@ -24,7 +24,7 @@ const getDateRange = (period) => {
 };
 
 export default function Workouts() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [workouts, setWorkouts] = useState([]);
   const [form, setForm] = useState({ name: '', type: 'strength', duration: '', caloriesBurned: '' });
   const [showForm, setShowForm] = useState(false);
@@ -157,7 +157,7 @@ export default function Workouts() {
         </div>
       </div>
 
-      {/* Filtres */}
+      {/* Filters */}
       {showFilters && (
         <div className="card mb-6 animate-slide-up">
           <div className="flex justify-between items-center mb-4">
@@ -232,7 +232,7 @@ export default function Workouts() {
         </div>
       )}
 
-      {/* Formulaire */}
+      {/* Form */}
       {showForm && (
         <div className="card mb-6 animate-slide-up">
           <h2 className="font-heading text-lg font-semibold text-text-main mb-4">
@@ -262,7 +262,7 @@ export default function Workouts() {
         </div>
       )}
 
-      {/* Liste */}
+      {/* List */}
       <div className="space-y-3">
         {filtered.map((w, i) => (
           <div key={w._id} className="card flex justify-between items-center animate-fade-in"
@@ -278,10 +278,10 @@ export default function Workouts() {
               <div>
                 <h3 className="font-heading font-semibold text-text-main">{w.name}</h3>
                 <p className="font-body text-sm text-text-muted capitalize">
-                  {w.type} • {w.duration} {t('common.minutes')} • {w.caloriesBurned} {t('common.kcal')}
+                   {t(`workouts.types.${w.type}`)} • {w.duration} {t('common.minutes')} • {w.caloriesBurned} {t('common.kcal')}
                 </p>
                 <p className="font-body text-xs text-gray-400">
-                  {new Date(w.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
+                  {new Date(w.date).toLocaleDateString(i18n.language === 'fr' ? 'fr-FR' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long' })}
                 </p>
               </div>
             </div>

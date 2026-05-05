@@ -1,6 +1,40 @@
 import { useState, useEffect } from 'react';
 import { getExercises } from '../services/api';
 import { useTranslation } from 'react-i18next';
+import benchImg from '../assets/exercises/bench-press.png';
+import pushupImg from '../assets/exercises/push-up.png';
+import inclineImg from '../assets/exercises/incline-bench-press.png';
+import chestFlyImg from '../assets/exercises/chest-fly.png';
+import dipsImg from '../assets/exercises/dips.png';
+import deadliftImg from '../assets/exercises/deadlift.png';
+import pullupImg from '../assets/exercises/pull-up.png';
+import bentRowImg from '../assets/exercises/bent-over-row.png';
+import latPulldownImg from '../assets/exercises/lat-pulldown.png';
+import seatedRowImg from '../assets/exercises/seated-cable-row.png';
+import squatImg from '../assets/exercises/squat.png';
+import legPressImg from '../assets/exercises/leg-press.png';
+import rdlImg from '../assets/exercises/romanian-deadlift.png';
+import lungesImg from '../assets/exercises/lunges.png';
+import legcurlImg from '../assets/exercises/leg-curl.png';
+import calfraisesImg from '../assets/exercises/calf-raises.png';
+import overheadpressImg from '../assets/exercises/overhead-press.png';
+import lateralraiseImg from '../assets/exercises/lateral-raise.png';
+import frontraiseImg from '../assets/exercises/front-raise.png';
+import arnoldpressImg from '../assets/exercises/arnold-press.png';
+import bicepcurlImg from '../assets/exercises/bicep-curl.png';
+import triceppushdownImg from '../assets/exercises/tricep-pushdown.png';
+import hammercurlImg from '../assets/exercises/hammer-curl.png';
+import skullcrusherImg from '../assets/exercises/skull-crusher.png';
+import plankImg from '../assets/exercises/plank.png';
+import crunchImg from '../assets/exercises/crunch.png';
+import russiantwistImg from '../assets/exercises/russian-twist.png';
+import legraiseImg from '../assets/exercises/leg-raise.png';
+import abwheelImg from '../assets/exercises/ab-wheel.png';
+import runningImg from '../assets/exercises/running.png';
+import cyclingImg from '../assets/exercises/cycling.png';
+import jumpropeImg from '../assets/exercises/jump-rope.png';
+import rowingmachineImg from '../assets/exercises/rowing-machine.png';
+import burpeesImg from '../assets/exercises/burpees.png';
 
 const DIFFICULTY_COLORS = {
   beginner: 'bg-green-100 text-green-700',
@@ -15,6 +49,43 @@ const MUSCLE_ICONS = {
 };
 
 const DIFFICULTIES = ['all', 'beginner', 'intermediate', 'advanced'];
+
+const EXERCISE_IMAGES = { //Images for each exercices
+  "Bench Press": benchImg,
+  "Push Up": pushupImg,
+  "Incline Bench Press": inclineImg,
+  "Chest Fly": chestFlyImg,
+  "Dips": dipsImg,
+  "Deadlift": deadliftImg,
+  "Pull Up": pullupImg,
+  "Bent Over Row": bentRowImg,
+  "Lat Pulldown": latPulldownImg,
+  "Seated Cable Row": seatedRowImg,
+  "Squat": squatImg,
+  "Leg Press": legPressImg,
+  "Romanian Deadlift": rdlImg,
+  "Lunges": lungesImg,
+  "Leg Curl": legcurlImg,
+  "Calf Raises": calfraisesImg,
+  "Overhead Press": overheadpressImg,
+  "Lateral Raise": lateralraiseImg,
+  "Front Raise": frontraiseImg,
+  "Arnold Press": arnoldpressImg,
+  "Bicep Curl": bicepcurlImg,
+  "Tricep Pushdown": triceppushdownImg,
+  "Hammer Curl": hammercurlImg,
+  "Skull Crusher": skullcrusherImg,
+  "Plank": plankImg,
+  "Crunch": crunchImg,
+  "Russian Twist": russiantwistImg,
+  "Leg Raise": legraiseImg,
+  "Ab Wheel": abwheelImg,
+  "Running": runningImg,
+  "Cycling": cyclingImg,
+  "Jump Rope": jumpropeImg,
+  "Rowing Machine": rowingmachineImg,
+  "Burpees": burpeesImg,
+};
 
 export default function ExerciseLibrary() {
   const { t } = useTranslation();
@@ -62,17 +133,15 @@ export default function ExerciseLibrary() {
         {t('exercises.title')}
       </h1>
 
-      {/* Recherche */}
       <div className="card mb-4">
         <input
-          placeholder={`🔍 ${t('exercises.search')}`}
+          placeholder={`🔍 ${t('exercises.search')}`} // Search exercice
           className="input-field"
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
       </div>
 
-      {/* Filtres muscles */}
       <div className="flex flex-wrap gap-2 mb-4">
         {MUSCLES.map(m => (
           <button key={m.value} onClick={() => setMuscle(m.value)}
@@ -86,7 +155,6 @@ export default function ExerciseLibrary() {
         ))}
       </div>
 
-      {/* Filtres difficulté */}
       <div className="flex gap-2 mb-6">
         {DIFFICULTIES.map(d => (
           <button key={d} onClick={() => setDifficulty(d)}
@@ -95,17 +163,17 @@ export default function ExerciseLibrary() {
                 ? 'bg-text-main text-white shadow'
                 : 'bg-white text-text-muted hover:bg-gray-50 shadow'
             }`}>
-            {d === 'all' ? t('exercises.allLevels') : d}
+            {d === 'all'
+              ? t('exercises.allLevels')
+              : t(`exercises.difficulty.${d}`)}
           </button>
         ))}
       </div>
 
-      {/* Compteur */}
       <p className="font-body text-sm text-text-muted mb-4">
         {total} {total > 1 ? t('exercises.founds') : t('exercises.found')}
       </p>
 
-      {/* Grille */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {paginated.map((ex, i) => (
           <div key={i}
@@ -113,29 +181,47 @@ export default function ExerciseLibrary() {
             className={`card cursor-pointer transition-all hover:shadow-card-hover ${
               selected?.name === ex.name ? 'border-2 border-primary' : ''
             }`}>
+
             <div className="flex justify-between items-start mb-3">
-              <span className="text-3xl">{MUSCLE_ICONS[ex.muscle] || '🏋️'}</span>
+
+              {EXERCISE_IMAGES[ex.name] ? (
+                <img
+                  src={EXERCISE_IMAGES[ex.name]}
+                  alt={ex.name}
+                  className="w-23 h-20 object-contain mx-auto"
+                />
+              ) : (
+                <span className="text-3xl">
+                  {MUSCLE_ICONS[ex.muscle] || '🏋️'}
+                </span>
+              )}
+
               <span className={`text-xs px-2 py-1 rounded-full capitalize font-heading font-medium ${DIFFICULTY_COLORS[ex.difficulty]}`}>
-                {ex.difficulty}
+                {t(`exercises.difficulty.${ex.difficulty.toLowerCase().replace(' ', '') === 'alllevels' ? 'all' : ex.difficulty.toLowerCase()}`)}
               </span>
             </div>
+
             <h3 className="font-heading font-bold text-text-main mb-1">{ex.name}</h3>
+
             <p className="font-body text-xs text-primary capitalize mb-2">
               {MUSCLES.find(m => m.value === ex.muscle)?.label || ex.muscle}
             </p>
+
             {selected?.name === ex.name && (
               <p className="font-body text-sm text-text-muted mt-3 pt-3 border-t">
-                {ex.description}
+                {t(`exercises.descriptions.${ex.name}`, { defaultValue: ex.description })}
               </p>
             )}
+
             <p className="font-body text-xs text-gray-400 mt-2">
-              {selected?.name === ex.name ? t('exercises.clickClose') : t('exercises.clickDetails')}
+              {selected?.name === ex.name
+                ? t('exercises.clickClose')
+                : t('exercises.clickDetails')}
             </p>
           </div>
         ))}
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center gap-2">
           <button onClick={() => setPage(p => Math.max(1, p - 1))}
@@ -143,6 +229,7 @@ export default function ExerciseLibrary() {
             className="px-4 py-2 rounded-xl bg-white shadow disabled:opacity-40 hover:bg-gray-50">
             ←
           </button>
+
           {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
             <button key={p} onClick={() => setPage(p)}
               className={`px-4 py-2 rounded-xl shadow ${
@@ -151,6 +238,7 @@ export default function ExerciseLibrary() {
               {p}
             </button>
           ))}
+
           <button onClick={() => setPage(p => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
             className="px-4 py-2 rounded-xl bg-white shadow disabled:opacity-40 hover:bg-gray-50">

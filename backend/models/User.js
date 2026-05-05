@@ -1,10 +1,11 @@
+// schema for a user account
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
+    unique: true, // must be unique
     trim: true
   },
   email: {
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true // hashed password
   },
   xp: { type: Number, default: 0 },
   level: { type: Number, default: 1 },
@@ -24,6 +25,6 @@ const userSchema = new mongoose.Schema({
   lastActive: { type: Date, default: null },
   badges: { type: [String], default: [] },
   calorieGoal: { type: Number, default: 2000 },
-}, { timestamps: true });
+}, { timestamps: true }); // add createdAt / updatedAt
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema); // export model
