@@ -186,45 +186,42 @@ const en = {
       '7 Day Streak': '🔥 7 Day Streak',
     },
 
-  
-    profile: {
-      title: 'My Profile',
-      level: 'Level',
-      xpToNext: 'XP remaining',
-      totalWorkouts: 'Total Workouts',
-      totalMeals: 'Meals Logged',
-      caloriesBurned: 'Calories Burned',
-      trainingMinutes: 'Training Minutes',
-      badges: 'Badges',
-      currentStreak: 'Current Streak',
-      days: 'days',
-
-      changeUsername: 'Change Username',
-      newUsername: 'New Username',
-      update: 'Update',
-
-      changePassword: 'Change Password',
-      currentPassword: 'Current Password',
-      newPassword: 'New Password',
-      confirmPassword: 'Confirm Password',
-      changePasswordBtn: 'Change Password',
-
-      passwordMismatch: 'Passwords do not match',
-
-      usernameUpdated: 'Username updated! ✓',
-      passwordUpdated: 'Password updated! 🔒',
-
-      loading: 'Loading...',
-    },
-
-
-
     badgeDescriptions: {
       'First Workout': 'Complete your first workout',
       'Fitness Beginner': 'Complete 10 workouts',
       'Consistency Champion': 'Complete 50 workouts',
       '7 Day Streak': 'Maintain a 7 day streak',
     }
+  },
+  
+  profile: {
+    title: 'My Profile',
+    level: 'Level',
+    xpToNext: 'XP remaining',
+    totalWorkouts: 'Total Workouts',
+    totalMeals: 'Meals Logged',
+    caloriesBurned: 'Calories Burned',
+    trainingMinutes: 'Training Minutes',
+    badges: 'Badges',
+    currentStreak: 'Current Streak',
+    days: 'days',
+
+    changeUsername: 'Change Username',
+    newUsername: 'New Username',
+    update: 'Update',
+
+    changePassword: 'Change Password',
+    currentPassword: 'Current Password',
+    newPassword: 'New Password',
+    confirmPassword: 'Confirm Password',
+    changePasswordBtn: 'Change Password',
+
+    passwordMismatch: 'Passwords do not match',
+
+    usernameUpdated: 'Username updated! ✓',
+    passwordUpdated: 'Password updated! 🔒',
+
+    loading: 'Loading...',
   },
 
   // HOME
