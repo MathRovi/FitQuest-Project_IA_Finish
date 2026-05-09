@@ -68,5 +68,5 @@ The application is now fully functional and accessible online!
 
 ## Links
 
-Web Service (backend) : https://fitquest-project-ia-finish.onrender.com
-Static Site (frontend) : https://fitquest-project-ia-finish-1-frontend.onrender.com
+* Web Service (backend) : https://fitquest-project-ia-finish.onrender.com
+* Static Site (frontend) : https://fitquest-project-ia-finish-1-frontend.onrender.com
